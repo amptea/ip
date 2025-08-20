@@ -22,9 +22,7 @@ public class ChoiceBot {
                 System.out.println("\tHere are the tasks in your list:");
                 for (int i = 0; i < taskList.size(); i++) {
                     Task currentTask = taskList.get(i);
-                    String statusIcon = currentTask.getStatusIcon();
-                    String taskDescription = currentTask.getDescription();
-                    System.out.println("\t" + (i + 1) + ".[" + statusIcon + "] " + taskDescription);
+                    System.out.println("\t" + (i + 1) + "." + currentTask);
                 }
                 System.out.println("---------------------------");
             } else if (command.startsWith("mark")) {
@@ -36,9 +34,45 @@ public class ChoiceBot {
                 Task task = taskList.get(taskNumber);
                 unmarkTask(task);
             } else {
-                taskList.add(new Task(command));
-                System.out.println("\tadded: " + command);
-                System.out.println("---------------------------");
+                String[] commandParts = command.split(" ", 2);
+                String taskType = commandParts[0];
+                String taskInfo = commandParts.length > 1 ? commandParts[1] : "";
+                if (taskInfo.isEmpty()) {
+                    System.out.println("Invalid input. Please try again");
+                    continue;
+                }
+                if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
+                    System.out.println("Got it. I've added this task: ");
+                }
+                switch (taskType) {
+                    case ("todo"):
+                        Task todo = new Todo(taskInfo);
+                        taskList.add(todo);
+                        System.out.println(todo);
+                        todo.displayCount();
+                        break;
+                    case ("deadline"):
+                        String dueDate = taskInfo.split("/by ")[1];
+                        String deadlineName = taskInfo.split("/by ")[0];
+                        Task deadline = new Deadline(deadlineName, dueDate);
+                        taskList.add(deadline);
+                        System.out.println(deadline);
+                        deadline.displayCount();
+                        break;
+                    case ("event"):
+                        String toFrom = taskInfo.split("/from ")[1];
+                        String to = toFrom.split("/to ")[1];
+                        String from = toFrom.split("/to ")[0];
+                        String eventName = taskInfo.split("/from ")[0];
+                        Task event = new Event(eventName, from, to);
+                        taskList.add(event);
+                        System.out.println(event);
+                        event.displayCount();
+                        break;
+                    default:
+                        System.out.println("Invalid task type. Please try again.");
+                }
+
             }
         }
         System.out.println(BOT_NAME + ": Thanks for stopping by! See you again!");
@@ -47,18 +81,14 @@ public class ChoiceBot {
     public static void markTask(Task task) {
         task.markAsDone();
         System.out.println("\tNice! I've marked this task as done:");
-        String statusIcon = task.getStatusIcon();
-        String taskDescription = task.getDescription();
-        System.out.println("\t\t[" + statusIcon + "] " + taskDescription);
+        System.out.println("\t" + task);
         System.out.println("---------------------------");
     }
 
     public static void unmarkTask(Task task) {
         task.markAsUndone();
         System.out.println("\tOk, I've unmarked the following task for you: ");
-        String statusIcon = task.getStatusIcon();
-        String taskDescription = task.getDescription();
-        System.out.println("\t\t[" + statusIcon + "] " + taskDescription);
+        System.out.println("\t" + task);
         System.out.println("---------------------------");
     }
 }
