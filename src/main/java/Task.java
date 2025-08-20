@@ -33,4 +33,11 @@ public class Task {
             System.out.println("Now you have " + count + " tasks in the list.");
         }
     }
+
+    public void deleteTask() {
+        System.out.println("Noted. I have removed the following task:");
+        System.out.println("\t" + this);
+        count--;
+        displayCount();
+    }
 }

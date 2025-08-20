@@ -37,6 +37,14 @@ public class ChoiceBot {
                     int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
                     Task task = taskList.get(taskNumber);
                     unmarkTask(task);
+                } else if (command.startsWith("delete")) {
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+                    if (taskNumber < 0 || taskNumber >= taskList.size()) {
+                        throw new ChoiceBotException("Invalid task number. Please try again.");
+                    }
+                    Task task = taskList.get(taskNumber);
+                    task.deleteTask();
+                    taskList.remove(taskNumber);
                 } else if (command.startsWith("todo") || command.startsWith("event") || command.startsWith("deadline")){
                     String[] commandParts = command.split(" ", 2);
                     String taskType = commandParts[0];
