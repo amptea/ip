@@ -1,10 +1,8 @@
 public class Choice {
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        System.out.println("Hello, Welcome to Choice!");
+        System.out.println("What would you like to do?");
+        System.out.println("---------------------------");
+        System.out.println("Thanks for stopping by! See you again!");
     }
 }
