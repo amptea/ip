@@ -3,6 +3,7 @@ import java.lang.management.BufferPoolMXBean;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class ChoiceBot {
     public static void main(String[] args) {
@@ -14,65 +15,75 @@ public class ChoiceBot {
         System.out.println(BOT_NAME + ": Hello, Welcome to ChoiceBot!");
         System.out.println(BOT_NAME + ": What would you like to do?");
         System.out.println("---------------------------");
+
         while (true) {
             String command = sc.nextLine();
-            if (command.equals("bye")) {
-                break;
-            } else if (command.equals("list")) {
-                System.out.println("\tHere are the tasks in your list:");
-                for (int i = 0; i < taskList.size(); i++) {
-                    Task currentTask = taskList.get(i);
-                    System.out.println("\t" + (i + 1) + "." + currentTask);
-                }
-                System.out.println("---------------------------");
-            } else if (command.startsWith("mark")) {
-                int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
-                Task task = taskList.get(taskNumber);
-                markTask(task);
-            } else if (command.startsWith("unmark")) {
-                int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
-                Task task = taskList.get(taskNumber);
-                unmarkTask(task);
-            } else {
-                String[] commandParts = command.split(" ", 2);
-                String taskType = commandParts[0];
-                String taskInfo = commandParts.length > 1 ? commandParts[1] : "";
-                if (taskInfo.isEmpty()) {
-                    System.out.println("Invalid input. Please try again");
-                    continue;
-                }
-                if (taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")) {
-                    System.out.println("Got it. I've added this task: ");
-                }
-                switch (taskType) {
-                    case ("todo"):
-                        Task todo = new Todo(taskInfo);
-                        taskList.add(todo);
-                        System.out.println(todo);
-                        todo.displayCount();
-                        break;
-                    case ("deadline"):
-                        String dueDate = taskInfo.split("/by ")[1];
-                        String deadlineName = taskInfo.split("/by ")[0];
-                        Task deadline = new Deadline(deadlineName, dueDate);
-                        taskList.add(deadline);
-                        System.out.println(deadline);
-                        deadline.displayCount();
-                        break;
-                    case ("event"):
-                        String toFrom = taskInfo.split("/from ")[1];
-                        String to = toFrom.split("/to ")[1];
-                        String from = toFrom.split("/to ")[0];
-                        String eventName = taskInfo.split("/from ")[0];
-                        Task event = new Event(eventName, from, to);
-                        taskList.add(event);
-                        System.out.println(event);
-                        event.displayCount();
-                        break;
-                    default:
-                        System.out.println("Invalid task type. Please try again.");
-                }
 
+            try {
+                if (command.equals("bye")) {
+                    break;
+                } else if (command.equals("list")) {
+                    System.out.println("\tHere are the tasks in your list:");
+                    for (int i = 0; i < taskList.size(); i++) {
+                        Task currentTask = taskList.get(i);
+                        System.out.println("\t" + (i + 1) + "." + currentTask);
+                    }
+                    System.out.println("---------------------------");
+                } else if (command.startsWith("mark")) {
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+                    Task task = taskList.get(taskNumber);
+                    markTask(task);
+                } else if (command.startsWith("unmark")) {
+                    int taskNumber = Integer.parseInt(command.split(" ")[1]) - 1;
+                    Task task = taskList.get(taskNumber);
+                    unmarkTask(task);
+                } else if (command.startsWith("todo") || command.startsWith("event") || command.startsWith("deadline")){
+                    String[] commandParts = command.split(" ", 2);
+                    String taskType = commandParts[0];
+                    String taskInfo = commandParts.length > 1 ? commandParts[1] : "";
+                    switch (taskType) {
+                        case ("todo"):
+                            Task todo = new Todo(taskInfo);
+                            taskList.add(todo);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("\t" + todo);
+                            todo.displayCount();
+                            break;
+                        case ("deadline"):
+                            if (!taskInfo.contains("/by ")) {
+                                throw new ChoiceBotException("You must add a due date for Deadline tasks. Please try again.");
+                            }
+                            String dueDate = taskInfo.split("/by ")[1];
+                            String deadlineName = taskInfo.split("/by ")[0];
+                            Task deadline = new Deadline(deadlineName, dueDate);
+                            taskList.add(deadline);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("\t" + deadline);
+                            deadline.displayCount();
+                            break;
+                        case ("event"):
+                            if (!taskInfo.contains("/from ")) {
+                                throw new ChoiceBotException("You must add a start date/time for Event tasks. Please try again.");
+                            }
+                            if (!taskInfo.contains("/to ")) {
+                                throw new ChoiceBotException("You must add a end date/time for Event tasks. Please try again.");
+                            }
+                            String toFrom = taskInfo.split("/from ")[1];
+                            String to = toFrom.split("/to ")[1];
+                            String from = toFrom.split("/to ")[0];
+                            String eventName = taskInfo.split("/from ")[0];
+                            Task event = new Event(eventName, from, to);
+                            taskList.add(event);
+                            System.out.println("Got it. I've added this task: ");
+                            System.out.println("\t" + event);
+                            event.displayCount();
+                            break;
+                    }
+                } else {
+                    throw new Exception("Invalid command entered. Please try again.");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
         System.out.println(BOT_NAME + ": Thanks for stopping by! See you again!");
