@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Choice {
+public class ChoiceBot {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Hello, Welcome to Choice!");
