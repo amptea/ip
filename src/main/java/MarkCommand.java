@@ -24,6 +24,7 @@ public class MarkCommand extends Command {
             }
             Task task = taskList.get(taskNumber);
             ChoiceBot.markTask(task);
+            Storage.saveFile(taskList);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }
