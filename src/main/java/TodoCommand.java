@@ -12,8 +12,9 @@ public class TodoCommand extends Command {
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("Please add a description for toDo event.");
         }
-        Task todo = new Todo(description);
+        Task todo = new Todo(description, false);
         taskList.add(todo);
+        Storage.saveFile(taskList);
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t" + todo);
         todo.displayCount();

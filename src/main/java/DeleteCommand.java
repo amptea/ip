@@ -25,6 +25,7 @@ public class DeleteCommand extends Command {
             Task task = taskList.get(taskNumber);
             task.deleteTask();
             taskList.remove(taskNumber);
+            Storage.saveFile(taskList);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }

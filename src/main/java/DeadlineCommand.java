@@ -18,8 +18,9 @@ public class DeadlineCommand extends Command {
         if (deadlineName.isBlank() || dueDate.isBlank()) {
             throw new ChoiceBotException("Please follow format: deadline {description} /by {deadline}.");
         }
-        Task deadline = new Deadline(deadlineName, dueDate);
+        Task deadline = new Deadline(deadlineName, false, dueDate);
         taskList.add(deadline);
+        Storage.saveFile(taskList);
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t" + deadline);
         deadline.displayCount();

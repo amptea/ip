@@ -24,6 +24,7 @@ public class UnmarkCommand extends Command {
             }
             Task task = taskList.get(taskNumber);
             ChoiceBot.unmarkTask(task);
+            Storage.saveFile(taskList);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }

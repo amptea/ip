@@ -2,10 +2,11 @@ public class Event extends Task {
     protected String from;
     protected String to;
 
-    public Event(String description, String from, String to) throws ChoiceBotException{
-        super(description);
+    public Event(String description, Boolean isDone, String from, String to) throws ChoiceBotException{
+        super(description, isDone);
         this.from = from;
         this.to = to;
+        this.type = "E";
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("You must add a description for Event tasks. Please try again.");
         }
@@ -22,5 +23,15 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (from: " + this.from + " to: " + this.to + ")";
+    }
+
+    @Override
+    public String saveTask() {
+        return String.format("%s | %d | %s | %s | %s",
+                this.getType(),
+                this.isDone ? 1 : 0,
+                this.description,
+                this.from,
+                this.to);
     }
 }

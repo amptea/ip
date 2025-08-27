@@ -23,8 +23,9 @@ public class EventCommand extends Command {
             throw new ChoiceBotException("Please follow format: event {description} /from {start} /to {end}.");
         }
 
-        Task event = new Event(eventName, from, to);
+        Task event = new Event(eventName, false, from, to);
         taskList.add(event);
+        Storage.saveFile(taskList);
         System.out.println("Got it. I've added this task: ");
         System.out.println("\t" + event);
         event.displayCount();
