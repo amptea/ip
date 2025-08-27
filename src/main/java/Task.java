@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -62,7 +64,8 @@ public class Task {
         case ("T"):
             return new Todo(description, isDone);
         case("D"):
-            String dueDate = taskParts[3].trim();
+            String dueDateString = taskParts[3].trim();
+            LocalDate dueDate = LocalDate.parse(dueDateString);
             return new Deadline(description, isDone, dueDate);
         case ("E"):
             String startDate = taskParts[3].trim();

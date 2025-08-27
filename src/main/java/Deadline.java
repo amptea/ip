@@ -1,7 +1,10 @@
-public class Deadline extends Task {
-    protected String dueDate;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-    public Deadline(String description, Boolean isDone, String dueDate) throws ChoiceBotException {
+public class Deadline extends Task {
+    protected LocalDate dueDate;
+
+    public Deadline(String description, Boolean isDone, LocalDate dueDate) throws ChoiceBotException {
         super(description, isDone);
         this.dueDate = dueDate;
         this.type = "D";
@@ -17,7 +20,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dueDate + ")";
+        return "[D]" + super.toString() + " (by: " + convertDate(dueDate) + ")";
     }
 
     @Override
@@ -27,5 +30,9 @@ public class Deadline extends Task {
                 this.isDone ? 1 : 0,
                 this.description,
                 this.dueDate);
+    }
+
+    public String convertDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
