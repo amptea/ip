@@ -11,7 +11,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList) throws ChoiceBotException {
+    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (!description.contains("/by ")) {
             throw new ChoiceBotException("Please follow format: deadline {description} /by {deadline}.");
         }
@@ -23,11 +23,9 @@ public class DeadlineCommand extends Command {
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString);
             Task deadline = new Deadline(deadlineName, false, dueDate);
-            taskList.add(deadline);
-            Storage.saveFile(taskList);
-            System.out.println("Got it. I've added this task: ");
-            System.out.println("\t" + deadline);
-            deadline.displayCount();
+            tasks.addTask(deadline);
+            Storage.saveFile(tasks);
+            ui.addTaskMessage(deadline);
         } catch (DateTimeParseException e) {
             throw new ChoiceBotException("Please use format \"yyyy-mm-dd\" for deadline.");
         }

@@ -2,6 +2,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -12,8 +13,8 @@ public class Storage {
         Storage.filePath = filePath;
     }
 
-    public ArrayList<Task> loadFile() throws ChoiceBotException {
-        ArrayList<Task> taskList = new ArrayList<>();
+    public TaskList loadFile() throws ChoiceBotException {
+        TaskList taskList = new TaskList();
         File file = new File(filePath);
         if (!file.exists()) {
             return taskList;
@@ -22,7 +23,7 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String text = scanner.nextLine();
                 Task task = Task.loadTask(text);
-                taskList.add(task);
+                taskList.addTask(task);
             }
         } catch (IOException e) {
             throw new ChoiceBotException("Could not read tasks from file: " + e.getMessage());
@@ -30,7 +31,7 @@ public class Storage {
         return taskList;
     }
 
-    public static void saveFile(ArrayList<Task> tasks) throws ChoiceBotException {
+    public static void saveFile(TaskList tasks) throws ChoiceBotException {
         try {
             File file = new File(filePath);
             File parentFile = file.getParentFile();
@@ -39,7 +40,8 @@ public class Storage {
             }
 
             try (FileWriter fw = new FileWriter(file)) {
-                for (Task t : tasks) {
+                ArrayList<Task> taskList = tasks.getTaskList();
+                for (Task t : taskList) {
                     fw.write(t.saveTask() + System.lineSeparator());
                 }
             }

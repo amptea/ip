@@ -8,7 +8,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList) throws ChoiceBotException {
+    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (!description.contains("/from ") || !description.contains("/to")) {
             throw new ChoiceBotException("Please follow format: event {description} /from {start} /to {end}.");
         }
@@ -24,10 +24,8 @@ public class EventCommand extends Command {
         }
 
         Task event = new Event(eventName, false, from, to);
-        taskList.add(event);
-        Storage.saveFile(taskList);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("\t" + event);
-        event.displayCount();
+        tasks.addTask(event);
+        Storage.saveFile(tasks);
+        ui.addTaskMessage(event);
     }
 }

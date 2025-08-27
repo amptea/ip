@@ -29,17 +29,11 @@ public class Task {
     }
 
     public void displayCount() {
-        if (count == 1) {
-            System.out.println("Now you have " + count + " task in the list.");
-
-        } else {
-            System.out.println("Now you have " + count + " tasks in the list.");
-        }
+        UI.displayCountMessage(count);
     }
 
-    public void deleteTask() {
-        System.out.println("Noted. I have removed the following task:");
-        System.out.println("\t" + this);
+    public void deleteMessage() {
+        UI.deleteTaskMessage(this);
         count--;
         displayCount();
     }

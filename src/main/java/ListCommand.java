@@ -9,15 +9,10 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList) throws ChoiceBotException {
+    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (!description.isBlank()) {
             throw new ChoiceBotException("Please only type the command \"list\"");
         }
-        System.out.println("\tHere are the tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            System.out.println("\t" + (i + 1) + "." + currentTask);
-        }
-        ChoiceBot.addDottedLine();
+        ui.displayList(tasks.getTaskList());
     }
 }
