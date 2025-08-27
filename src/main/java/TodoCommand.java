@@ -8,16 +8,14 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList) throws ChoiceBotException {
+    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("Please add a description for toDo event.");
         }
         Task todo = new Todo(description, false);
-        taskList.add(todo);
-        Storage.saveFile(taskList);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("\t" + todo);
-        todo.displayCount();
+        tasks.addTask(todo);
+        Storage.saveFile(tasks);
+        ui.addTaskMessage(todo);
     }
 }
 

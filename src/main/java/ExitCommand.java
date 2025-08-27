@@ -5,7 +5,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public void execute(ArrayList<Task> taskList) {
-        ChoiceBot.say("ChoiceBot", ": Thanks for stopping by! See you again!");
+    public void execute(TaskList tasks, UI ui) {
+        ui.exitMessage();
     }
 }
