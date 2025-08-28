@@ -1,4 +1,10 @@
-import java.util.ArrayList;
+package choicebot.command;
+
+import choicebot.ChoiceBotException;
+import choicebot.storage.Storage;
+import choicebot.task.Task;
+import choicebot.task.TaskList;
+import choicebot.ui.UI;
 
 public class UnmarkCommand extends Command {
     protected String description;
@@ -27,7 +33,7 @@ public class UnmarkCommand extends Command {
             ui.unmarkTaskMessage(task);
             Storage.saveFile(tasks);
         } catch (NumberFormatException e) {
-            throw new ChoiceBotException("Sorry! Task number must be an integer.");
+            throw new ChoiceBotException("Sorry! choicebot.task.Task number must be an integer.");
         }
     }
 }

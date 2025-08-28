@@ -1,4 +1,11 @@
-import java.util.ArrayList;
+package choicebot.command;
+
+import choicebot.ChoiceBotException;
+import choicebot.storage.Storage;
+import choicebot.task.Event;
+import choicebot.task.Task;
+import choicebot.task.TaskList;
+import choicebot.ui.UI;
 
 public class EventCommand extends Command {
     protected String description;

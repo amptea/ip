@@ -1,10 +1,13 @@
-import java.awt.desktop.SystemSleepEvent;
-import java.io.IOException;
-import java.lang.management.BufferPoolMXBean;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+package choicebot;
+
+import choicebot.command.Command;
+import choicebot.command.ExitCommand;
+import choicebot.parser.Parser;
+import choicebot.storage.Storage;
+import choicebot.task.TaskList;
+import choicebot.ui.UI;
+
 import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class ChoiceBot {
     public static void main(String[] args) {

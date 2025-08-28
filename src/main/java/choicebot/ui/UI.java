@@ -1,8 +1,12 @@
-import javax.sound.midi.SysexMessage;
+package choicebot.ui;
+
+import choicebot.ChoiceBotException;
+import choicebot.task.Task;
+
 import java.util.ArrayList;
 
 public class UI {
-    final String BOT_NAME = "ChoiceBot";
+    final String BOT_NAME = "choicebot.ChoiceBot";
     public static void showDottedLine() {
         System.out.println("---------------------------");
     }
@@ -16,7 +20,7 @@ public class UI {
     }
 
     public void welcome() {
-        say(BOT_NAME, ": Hello, Welcome to ChoiceBot!");
+        say(BOT_NAME, ": Hello, Welcome to choicebot.ChoiceBot!");
         say(BOT_NAME, ": What would you like to do?");
         showDottedLine();
     }
@@ -70,6 +74,6 @@ public class UI {
     }
 
     public void exitMessage() {
-        say("ChoiceBot", ": Thanks for stopping by! See you again!");
+        say("choicebot.ChoiceBot", ": Thanks for stopping by! See you again!");
     }
 }
