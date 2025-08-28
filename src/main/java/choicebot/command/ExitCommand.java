@@ -1,4 +1,7 @@
-import java.util.ArrayList;
+package choicebot.command;
+
+import choicebot.task.TaskList;
+import choicebot.ui.UI;
 
 public class ExitCommand extends Command {
     public ExitCommand() {

@@ -1,3 +1,7 @@
+package choicebot.task;
+
+import choicebot.ChoiceBotException;
+
 public class Todo extends Task {
     public Todo(String description, Boolean isDone) throws ChoiceBotException {
         super(description, isDone);

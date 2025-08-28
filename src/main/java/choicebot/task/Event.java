@@ -1,20 +1,24 @@
+package choicebot.task;
+
+import choicebot.ChoiceBotException;
+
 public class Event extends Task {
     protected String from;
     protected String to;
 
-    public Event(String description, Boolean isDone, String from, String to) throws ChoiceBotException{
+    public Event(String description, Boolean isDone, String from, String to) throws ChoiceBotException {
         super(description, isDone);
         this.from = from;
         this.to = to;
         this.type = "E";
         if (description == null || description.isBlank()) {
-            throw new ChoiceBotException("You must add a description for Event tasks. Please try again.");
+            throw new ChoiceBotException("You must add a description for choicebot.task.Event tasks. Please try again.");
         }
         if (from == null) {
-            throw new ChoiceBotException("You must add a valid start date/time for Event tasks. Please try again.");
+            throw new ChoiceBotException("You must add a valid start date/time for choicebot.task.Event tasks. Please try again.");
         }
         if (to == null) {
-            throw new ChoiceBotException("You must add a valid end date/time for Event tasks. Please try again.");
+            throw new ChoiceBotException("You must add a valid end date/time for choicebot.task.Event tasks. Please try again.");
         } else {
             count++;
         }

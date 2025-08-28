@@ -1,4 +1,15 @@
-import java.util.ArrayList;
+package choicebot.parser;
+
+import choicebot.ChoiceBotException;
+import choicebot.command.Command;
+import choicebot.command.DeadlineCommand;
+import choicebot.command.DeleteCommand;
+import choicebot.command.EventCommand;
+import choicebot.command.ExitCommand;
+import choicebot.command.ListCommand;
+import choicebot.command.MarkCommand;
+import choicebot.command.TodoCommand;
+import choicebot.command.UnmarkCommand;
 
 public class Parser {
     public static Command parse(String command) throws ChoiceBotException {

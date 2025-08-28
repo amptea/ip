@@ -1,7 +1,14 @@
-import java.awt.*;
+package choicebot.command;
+
+import choicebot.ChoiceBotException;
+import choicebot.storage.Storage;
+import choicebot.task.Deadline;
+import choicebot.task.Task;
+import choicebot.task.TaskList;
+import choicebot.ui.UI;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class DeadlineCommand extends Command {
     protected String description;

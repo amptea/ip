@@ -1,3 +1,8 @@
+package choicebot.task;
+
+import choicebot.ChoiceBotException;
+import choicebot.ui.UI;
+
 import java.time.LocalDate;
 
 public class Task {
@@ -66,7 +71,7 @@ public class Task {
             String endDate = taskParts[4].trim();
             return new Event(description, isDone, startDate, endDate);
         default:
-            throw new ChoiceBotException("Task could not be loaded properly.");
+            throw new ChoiceBotException("choicebot.task.Task could not be loaded properly.");
         }
     }
 }

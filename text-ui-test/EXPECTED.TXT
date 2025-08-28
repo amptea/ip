@@ -1,5 +1,5 @@
-ChoiceBot: Hello, Welcome to ChoiceBot!
-ChoiceBot: What would you like to do?
+choicebot.ChoiceBot: Hello, Welcome to choicebot.ChoiceBot!
+choicebot.ChoiceBot: What would you like to do?
 ---------------------------
 Got it. I've added this task:
 	[T][ ] borrow book
@@ -21,4 +21,4 @@ Now you have 3 tasks in the list.
 	Ok, I've unmarked the following task for you:
 	[D][ ] return book  (by: Sunday)
 ---------------------------
-ChoiceBot: Thanks for stopping by! See you again!
+choicebot.ChoiceBot: Thanks for stopping by! See you again!
