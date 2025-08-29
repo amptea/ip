@@ -28,11 +28,20 @@ test {
 }
 
 application {
-    mainClass.set("choicebot.Choicebot")
+    mainClass.set("choicebot.ChoiceBot")
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'choicebot.ChoiceBot'
+        )
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "choicebot"
     archiveClassifier = null
 }
 
