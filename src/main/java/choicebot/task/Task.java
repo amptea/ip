@@ -11,9 +11,14 @@ public class Task {
     protected static int count;
     protected String type;
 
-    public Task(String description, Boolean isDone) {
+    public Task(String description, Boolean isDone) throws ChoiceBotException {
         this.description = description;
         this.isDone = isDone;
+        if (description == null || description.isBlank()) {
+            throw new ChoiceBotException("You must add a description for toDo tasks. Please try again.");
+        } else {
+            count++;
+        }
     }
 
     public String getStatusIcon() {
@@ -35,6 +40,10 @@ public class Task {
 
     public void displayCount() {
         UI.displayCountMessage(count);
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     public void deleteMessage() {
@@ -71,7 +80,7 @@ public class Task {
             String endDate = taskParts[4].trim();
             return new Event(description, isDone, startDate, endDate);
         default:
-            throw new ChoiceBotException("choicebot.task.Task could not be loaded properly.");
+            throw new ChoiceBotException("Task could not be loaded properly.");
         }
     }
 }
