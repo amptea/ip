@@ -7,13 +7,31 @@ import choicebot.task.TaskList;
 import choicebot.task.Todo;
 import choicebot.ui.UI;
 
+/**
+ * Represents a command that creates and adds a Todo Event to the task list.
+ * A Todo follows the format: todo {description}
+ */
 public class TodoCommand extends Command {
     protected String description;
 
+    /**
+     * Constructs a Todo Event with the given description.
+     *
+     * @param description Contains name of the Todo Event.
+     */
     public TodoCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the Todo command by creating new Todo instance.
+     * The Todo instance is added to given task list and saved to storage.
+     * Displays a confirmation message through given UI.
+     *
+     * @param tasks Task list in current instance.
+     * @param ui User interface in current instance.
+     * @throws ChoiceBotException If description is null or blank.
+     */
     @Override
     public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (description == null || description.isBlank()) {
