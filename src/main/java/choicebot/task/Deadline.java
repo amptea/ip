@@ -13,10 +13,12 @@ public class Deadline extends Task {
         this.dueDate = dueDate;
         this.type = "D";
         if (description == null || description.isBlank()) {
-            throw new ChoiceBotException("You must add a description for choicebot.task.Deadline tasks. Please try again.");
+            throw new ChoiceBotException(
+                    "You must add a description for choicebot.task.Deadline tasks. Please try again.");
         }
         if (dueDate == null) {
-            throw new ChoiceBotException("You must add a due date for choicebot.task.Deadline tasks. Please try again.");
+            throw new ChoiceBotException(
+                    "You must add a due date for choicebot.task.Deadline tasks. Please try again.");
         } else {
             count++;
         }

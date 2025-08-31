@@ -6,7 +6,7 @@ import choicebot.task.Task;
 import java.util.ArrayList;
 
 public class UI {
-    final String BOT_NAME = "choicebot.ChoiceBot";
+    final String BOT_NAME = "ChoiceBot";
     public static void showDottedLine() {
         System.out.println("---------------------------");
     }
@@ -20,7 +20,7 @@ public class UI {
     }
 
     public void welcome() {
-        say(BOT_NAME, ": Hello, Welcome to choicebot.ChoiceBot!");
+        say(BOT_NAME, ": Hello, Welcome to ChoiceBot!");
         say(BOT_NAME, ": What would you like to do?");
         showDottedLine();
     }
@@ -74,6 +74,6 @@ public class UI {
     }
 
     public void exitMessage() {
-        say("choicebot.ChoiceBot", ": Thanks for stopping by! See you again!");
+        say("ChoiceBot", ": Thanks for stopping by! See you again!");
     }
 }
