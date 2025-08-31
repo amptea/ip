@@ -1,15 +1,7 @@
 package choicebot.parser;
 
 import choicebot.ChoiceBotException;
-import choicebot.command.Command;
-import choicebot.command.DeadlineCommand;
-import choicebot.command.DeleteCommand;
-import choicebot.command.EventCommand;
-import choicebot.command.ExitCommand;
-import choicebot.command.ListCommand;
-import choicebot.command.MarkCommand;
-import choicebot.command.TodoCommand;
-import choicebot.command.UnmarkCommand;
+import choicebot.command.*;
 
 public class Parser {
     public static Command parse(String command) throws ChoiceBotException {
@@ -34,6 +26,8 @@ public class Parser {
             return new EventCommand(commandDescription);
         case ("deadline"):
             return new DeadlineCommand(commandDescription);
+        case ("find"):
+            return new FindCommand(commandDescription);
         default:
             throw new ChoiceBotException("Invalid input. Please try again.");
         }

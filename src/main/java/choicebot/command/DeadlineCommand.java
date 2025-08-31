@@ -22,11 +22,14 @@ public class DeadlineCommand extends Command {
         if (!description.contains("/by ")) {
             throw new ChoiceBotException("Please follow format: deadline {description} /by {deadline}.");
         }
+
         String dueDateString = description.split("/by ")[1].trim();
         String deadlineName = description.split("/by ")[0].trim();
+
         if (deadlineName.isBlank() || dueDateString.isBlank()) {
             throw new ChoiceBotException("Please follow format: deadline {description} /by {deadline}.");
         }
+
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString);
             Task deadline = new Deadline(deadlineName, false, dueDate);
