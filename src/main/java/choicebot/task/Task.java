@@ -106,6 +106,7 @@ public class Task {
         String type = taskParts[0].trim();
         boolean isDone = taskParts[1].trim().equals("1");
         String description = taskParts[2].trim();
+
         switch (type) {
         case ("T"):
             return new Todo(description, isDone);
@@ -120,5 +121,12 @@ public class Task {
         default:
             throw new ChoiceBotException("Task could not be loaded properly.");
         }
+    }
+
+    /**
+     * Returns the description of task.
+     */
+    public String getDescription() {
+        return this.description;
     }
 }

@@ -126,4 +126,24 @@ public class UI {
     public void exitMessage() {
         say("ChoiceBot", ": Thanks for stopping by! See you again!");
     }
+
+    /**
+     * Displays an error message if no tasks match the given keyword.
+     */
+    public void displayNoMatchingTasks() {
+        displayMessage("Sorry. There are no tasks matching your keyword");
+        showDottedLine();
+    }
+
+    /**
+     * Displays a list of tasks matching the given keyword.
+     */
+    public void displayMatchingTasks(ArrayList<Task> taskList) {
+        displayMessage("\tHere are the matching tasks in your list:");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currentTask = taskList.get(i);
+            displayMessage("\t" + (i + 1) + "." + currentTask);
+        }
+        showDottedLine();
+    }
 }
