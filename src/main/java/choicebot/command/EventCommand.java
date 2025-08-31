@@ -35,7 +35,8 @@ public class EventCommand extends Command {
     @Override
     public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (!description.contains("/from ") || !description.contains("/to")) {
-            throw new ChoiceBotException("Please follow format: event {description} /from {start} /to {end}.");
+            throw new ChoiceBotException(
+                    "Please follow format: event {description} /from {start} /to {end}.");
         }
 
         String[] descriptionTimeSplit = description.split("/from", 2);
@@ -45,7 +46,8 @@ public class EventCommand extends Command {
         String to = timeSplit[1].trim();
 
         if (eventName.isBlank() || from.isBlank() || to.isBlank()) {
-            throw new ChoiceBotException("Please follow format: event {description} /from {start} /to {end}.");
+            throw new ChoiceBotException(
+                    "Please follow format: event {description} /from {start} /to {end}.");
         }
 
         Task event = new Event(eventName, false, from, to);

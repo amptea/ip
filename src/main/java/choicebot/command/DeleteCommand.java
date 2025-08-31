@@ -50,7 +50,7 @@ public class DeleteCommand extends Command {
             tasks.deleteTask(task);
             Storage.saveFile(tasks);
         } catch (NumberFormatException e) {
-            throw new ChoiceBotException("Sorry! choicebot.task.Task number must be an integer.");
+            throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }
     }
 }

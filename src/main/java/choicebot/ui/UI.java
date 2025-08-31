@@ -41,7 +41,7 @@ public class UI {
      * Greets the user with a welcome message when ChoiceBot first initiates.
      */
     public void welcome() {
-        say(BOT_NAME, ": Hello, Welcome to choicebot.ChoiceBot!");
+        say(BOT_NAME, ": Hello, Welcome to ChoiceBot!");
         say(BOT_NAME, ": What would you like to do?");
         showDottedLine();
     }
@@ -124,6 +124,6 @@ public class UI {
      * Displays the exit message when the conversation with ChoiceBot ends.
      */
     public void exitMessage() {
-        say("choicebot.ChoiceBot", ": Thanks for stopping by! See you again!");
+        say("ChoiceBot", ": Thanks for stopping by! See you again!");
     }
 }
