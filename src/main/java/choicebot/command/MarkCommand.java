@@ -6,13 +6,31 @@ import choicebot.task.Task;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
+/**
+ * Represents a command that marks a given task in the tasklist.
+ * The task is chosen through the given index.
+ */
 public class MarkCommand extends Command {
     protected String description;
 
+    /**
+     * Constructs a MarkCommand with the given description.
+     *
+     * @param description Contains index of task to be marked.
+     */
     public MarkCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the Mark command by marking the given task index.
+     * The stored task list is also updated with the mark.
+     * Displays a confirmation message through given UI.
+     *
+     * @param tasks Task list in current instance.
+     * @param ui User interface in current instance.
+     * @throws ChoiceBotException If task number given is out of range, not given, or task list is empty.
+     */
     @Override
     public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         try {
@@ -33,7 +51,7 @@ public class MarkCommand extends Command {
             ui.markTaskMessage(task);
             Storage.saveFile(tasks);
         } catch (NumberFormatException e) {
-            throw new ChoiceBotException("Sorry! choicebot.task.Task number must be an integer.");
+            throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }
     }
 }

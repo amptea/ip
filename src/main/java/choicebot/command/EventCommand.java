@@ -7,13 +7,31 @@ import choicebot.task.Task;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
+/**
+ * Represents a command that creates and adds a Event task to tasklist.
+ * An Event follows the format: event {description} /from {time} /to {time}
+ */
 public class EventCommand extends Command {
     protected String description;
 
+    /**
+     * Constructs an EventCommand with the given description.
+     *
+     * @param description Contains name of Event, and start and end date/time.
+     */
     public EventCommand(String description) {
         this.description = description;
     }
 
+    /**
+     * Executes the Event command by creating new Event instance.
+     * The Event instance is added to given task list and saved to storage.
+     * Displays a confirmation message through given UI.
+     *
+     * @param tasks Task list in current instance.
+     * @param ui User interface in current instance.
+     * @throws ChoiceBotException If command does not have /from, /to, or if name, start, or end date/time missing.
+     */
     @Override
     public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
         if (!description.contains("/from ") || !description.contains("/to")) {

@@ -11,7 +11,21 @@ import choicebot.command.MarkCommand;
 import choicebot.command.TodoCommand;
 import choicebot.command.UnmarkCommand;
 
+/**
+ * Parser class interprets user input and converts it to an executable Command.
+ */
 public class Parser {
+    /**
+     * Parses the given user input into a Command.
+     * <p>
+     * The first word in the user input is treated as the command keyword,
+     * and the rest of the input is passed to the command as its description.
+     * </p>
+     *
+     * @param command The actual input from the user.
+     * @return a Command object representing the parsed input.
+     * @throws ChoiceBotException if the user input does not match any valid command.
+     */
     public static Command parse(String command) throws ChoiceBotException {
         String[] commandParts = command.split(" ", 2);
         String commandWord = commandParts[0];

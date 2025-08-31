@@ -10,13 +10,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The Storage class handles reading and writing tasks from a local file to the program.
+ * Tasks are stored line by line, with each line being a formatted representation of the Task.
+ */
 public class Storage {
+    /** The path to the file used for saving and loading tasks. */
     protected static String filePath = "";
 
+    /**
+     * Creates a new Storage instance based on the given file path.
+     */
     public Storage(String filePath) {
         Storage.filePath = filePath;
     }
 
+    /**
+     * Loads tasks from the storage file into a Tasklist.
+     * Returns an empty TaskList if the file does not exist.
+     *
+     * @return Tasklist of tasks loaded from file.
+     * @throws ChoiceBotException If the file could not be read.
+     */
     public TaskList loadFile() throws ChoiceBotException {
         TaskList taskList = new TaskList();
         File file = new File(filePath);
@@ -35,6 +50,14 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves the given Tasklist to the storage file in formatted representation.
+     * <p>
+     * Creates the parent directory if it does not exist.
+     * </p>
+     *
+     * @throws ChoiceBotException If the file cannot be written to.
+     */
     public static void saveFile(TaskList tasks) throws ChoiceBotException {
         try {
             File file = new File(filePath);
