@@ -7,48 +7,48 @@ import java.util.ArrayList;
  */
 public class TaskList {
     /** The list of tasks. */
-    protected ArrayList<Task> taskList;
+    protected ArrayList<Task> tasks;
 
     /**
      * Constructs a TaskList with the given list of tasks.
      */
-    public TaskList(ArrayList<Task> taskList) {
-        this.taskList = taskList;
+    public TaskList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
      * Constructs an empty Tasklist.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
      * Adds a Task to the task list.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
     }
 
     /**
      * Removes a Task from the task list.
      */
     public void deleteTask(Task task) {
-        this.taskList.remove(task);
+        this.tasks.remove(task);
     }
 
     /**
      * Returns the current task list.
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return this.tasks;
     }
 
     /**
      * Returns the current task list size.
      */
     public int size() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     /**
@@ -56,7 +56,7 @@ public class TaskList {
      * @return True if task list is empty, false otherwise.
      */
     public boolean isEmpty() {
-        return this.taskList.isEmpty();
+        return this.tasks.isEmpty();
     }
 
     /**
@@ -65,12 +65,18 @@ public class TaskList {
      * @param taskNumber Index of the task to be returned.
      */
     public Task getTask(Integer taskNumber) {
-        return this.taskList.get(taskNumber);
+        return this.tasks.get(taskNumber);
     }
 
+    /**
+     * Finds all tasks that match the given keyword.
+     *
+     * @param keyword Keyword to search for in taskList.
+     * @return List of all tasks that match the keyword.
+     */
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        for (Task task: this.taskList) {
+        for (Task task: this.tasks) {
             if (task.getDescription().contains(keyword)) {
                 matchingTasks.add(task);
             }

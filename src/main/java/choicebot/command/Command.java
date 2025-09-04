@@ -16,6 +16,5 @@ public class Command {
      * @throws ChoiceBotException If an error occurs during command execution.
      */
     public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
-        return;
     }
 }

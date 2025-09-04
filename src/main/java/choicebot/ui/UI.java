@@ -1,9 +1,9 @@
 package choicebot.ui;
 
+import java.util.ArrayList;
+
 import choicebot.ChoiceBotException;
 import choicebot.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Handles all user interactions with ChoiceBot.
@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class UI {
     /** Name used by ChoiceBot in its messages. */
-    final String BOT_NAME = "ChoiceBot";
+    private static final String BOT_NAME = "ChoiceBot";
 
     /**
      * Displays a dotted line separator for easier readibility in console output.

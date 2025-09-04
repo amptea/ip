@@ -8,7 +8,7 @@ import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
 /**
- * Represents a command that creates and adds a Event task to tasklist.
+ * Represents a command that creates and adds an Event task to tasklist.
  * An Event follows the format: event {description} /from {time} /to {time}
  */
 public class EventCommand extends Command {

@@ -1,9 +1,9 @@
 package choicebot.task;
 
+import java.time.LocalDate;
+
 import choicebot.ChoiceBotException;
 import choicebot.ui.UI;
-
-import java.time.LocalDate;
 
 /**
  * Represents the task superclass.
@@ -12,9 +12,9 @@ import java.time.LocalDate;
  * </p>
  */
 public class Task {
+    protected static int count;
     protected String description;
     protected boolean isDone;
-    protected static int count;
     protected String type;
 
     /**

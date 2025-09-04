@@ -1,5 +1,7 @@
 package choicebot;
 
+import java.util.Scanner;
+
 import choicebot.command.Command;
 import choicebot.command.ExitCommand;
 import choicebot.parser.Parser;
@@ -7,22 +9,11 @@ import choicebot.storage.Storage;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
-import java.util.Scanner;
-
 /**
  * The main class of ChoiceBot.
  * ChoiceBot is a chatbot used to add, delete and manage tasks using command inputs.
  */
 public class ChoiceBot {
-    /**
-     * The entry point of the chatbot.
-     *
-     * @param args Command-line arguments (Not used yet).
-     */
-    public static void main(String[] args) {
-        new ChoiceBot("data/tasks.txt");
-    }
-
     /**
      * Constructs and runs an instance of ChoiceBot using the specified file path.
      *
@@ -56,5 +47,14 @@ public class ChoiceBot {
                 ui.displayMessage(e.getMessage());
             }
         }
+    }
+
+    /**
+     * The entry point of the chatbot.
+     *
+     * @param args Command-line arguments (Not used yet).
+     */
+    public static void main(String[] args) {
+        new ChoiceBot("data/tasks.txt");
     }
 }

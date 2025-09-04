@@ -1,6 +1,5 @@
 package choicebot.command;
 
-import choicebot.ChoiceBotException;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 

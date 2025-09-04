@@ -1,7 +1,16 @@
 package choicebot.parser;
 
 import choicebot.ChoiceBotException;
-import choicebot.command.*;
+import choicebot.command.Command;
+import choicebot.command.DeadlineCommand;
+import choicebot.command.DeleteCommand;
+import choicebot.command.EventCommand;
+import choicebot.command.ExitCommand;
+import choicebot.command.FindCommand;
+import choicebot.command.ListCommand;
+import choicebot.command.MarkCommand;
+import choicebot.command.TodoCommand;
+import choicebot.command.UnmarkCommand;
 
 /**
  * Parser class interprets user input and converts it to an executable Command.

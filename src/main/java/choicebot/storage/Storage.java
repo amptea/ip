@@ -1,14 +1,14 @@
 package choicebot.storage;
 
-import choicebot.ChoiceBotException;
-import choicebot.task.Task;
-import choicebot.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import choicebot.ChoiceBotException;
+import choicebot.task.Task;
+import choicebot.task.TaskList;
 
 /**
  * The Storage class handles reading and writing tasks from a local file to the program.

@@ -1,9 +1,9 @@
 package choicebot.task;
 
-import choicebot.ChoiceBotException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import choicebot.ChoiceBotException;
 
 /**
  * Represents a Deadline task.

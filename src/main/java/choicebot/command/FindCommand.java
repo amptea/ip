@@ -1,17 +1,17 @@
 package choicebot.command;
 
+import java.util.ArrayList;
+
 import choicebot.ChoiceBotException;
 import choicebot.task.Task;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
-import java.util.ArrayList;
-
 /**
  * Represents a command to find tasks that contain a given keyword in the task description.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     /**
      * Constructs a FindCommand with the given search keyword.
