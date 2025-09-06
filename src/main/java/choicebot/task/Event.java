@@ -37,8 +37,6 @@ public class Event extends Task {
         if (to == null) {
             throw new ChoiceBotException(
                     "You must add a valid end date/time for choicebot.task.Event tasks. Please try again.");
-        } else {
-            count++;
         }
     }
 

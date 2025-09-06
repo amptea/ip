@@ -29,10 +29,11 @@ public class MarkCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If task number given is out of range, not given, or task list is empty.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         try {
             if (description == null || description.isBlank()) {
                 throw new ChoiceBotException("Please provide a task number to mark.");
@@ -48,8 +49,8 @@ public class MarkCommand extends Command {
             }
             Task task = tasks.getTask(taskNumber);
             task.markAsDone();
-            ui.markTaskMessage(task);
-            Storage.saveFile(tasks);
+            storage.saveFile(tasks);
+            return ui.markTaskMessage(task);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }

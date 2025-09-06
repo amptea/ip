@@ -30,10 +30,11 @@ public class EventCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If command does not have /from, /to, or if name, start, or end date/time missing.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         if (!description.contains("/from ") || !description.contains("/to")) {
             throw new ChoiceBotException(
                     "Please follow format: event {description} /from {start} /to {end}.");
@@ -50,9 +51,9 @@ public class EventCommand extends Command {
                     "Please follow format: event {description} /from {start} /to {end}.");
         }
 
-        Task event = new Event(eventName, false, from, to);
-        tasks.addTask(event);
-        Storage.saveFile(tasks);
-        ui.addTaskMessage(event);
+        Task eventTask = new Event(eventName, false, from, to);
+        tasks.addTask(eventTask);
+        storage.saveFile(tasks);
+        return ui.addTaskMessage(eventTask, tasks);
     }
 }

@@ -1,26 +1,24 @@
 package choicebot.task;
 
-import choicebot.ChoiceBotException;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import choicebot.ChoiceBotException;
 
 public class TaskTest {
-
-    @BeforeEach
-    void resetCount() {
-        // Reset static counter before each test
-        Task.count = 0;
-    }
-
     @Test
     public void getCount_instantiateTask_increasesCount() {
+        TaskList tasks = new TaskList();
         try {
             Task t1 = new Task("task1", false);
             Task t2 = new Task("task2", false);
+            tasks.addTask(t1);
+            tasks.addTask(t2);
             // adding 2 tasks results in count of 2
-            assertEquals(2, Task.getCount());
+            assertEquals(2, tasks.getCount());
         } catch (ChoiceBotException e) {
             fail(); // the test should not reach this line
         }
@@ -28,14 +26,17 @@ public class TaskTest {
 
     @Test
     public void deleteMessage_deleteTask_decreasesCount() {
+        TaskList tasks = new TaskList();
         try {
             Task t1 = new Task("task1", false);
             Task t2 = new Task("task2", false);
+            tasks.addTask(t1);
+            tasks.addTask(t2);
             // adding 2 tasks results in count of 2
-            assertEquals(2, Task.getCount());
-            t1.deleteMessage();
+            assertEquals(2, tasks.getCount());
+            tasks.deleteTask(t1);
             // deleting 1 task results in count of 1
-            assertEquals(1, Task.getCount());
+            assertEquals(1, tasks.getCount());
         } catch (ChoiceBotException e) {
             fail(); // the test should not reach this line
         }
@@ -77,7 +78,6 @@ public class TaskTest {
     @Test
     public void loadTask_invalidString_throwsChoiceBotException() {
         // load formatted string of deadline task
-        assertThrows(ChoiceBotException.class,
-                () -> Task.loadTask("X | 0 | test"));
+        assertThrows(ChoiceBotException.class, () -> Task.loadTask("X | 0 | test"));
     }
 }

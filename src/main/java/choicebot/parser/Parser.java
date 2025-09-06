@@ -18,6 +18,7 @@ import choicebot.command.UnmarkCommand;
 public class Parser {
     /**
      * Parses the given user input into a Command.
+     *
      * <p>
      * The first word in the user input is treated as the command keyword,
      * and the rest of the input is passed to the command as its description.

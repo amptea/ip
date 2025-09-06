@@ -1,6 +1,7 @@
 package choicebot.command;
 
 import choicebot.ChoiceBotException;
+import choicebot.storage.Storage;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
@@ -11,10 +12,13 @@ import choicebot.ui.UI;
 public class Command {
     /**
      * Executes the command using the given task list and user interface.
+     *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If an error occurs during command execution.
      */
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
+        return null;
     }
 }

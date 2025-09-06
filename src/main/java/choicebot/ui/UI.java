@@ -1,9 +1,10 @@
 package choicebot.ui;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
-import choicebot.ChoiceBotException;
 import choicebot.task.Task;
+import choicebot.task.TaskList;
 
 /**
  * Handles all user interactions with ChoiceBot.
@@ -12,12 +13,13 @@ import choicebot.task.Task;
 public class UI {
     /** Name used by ChoiceBot in its messages. */
     private static final String BOT_NAME = "ChoiceBot";
+    private final Scanner scanner;
 
     /**
-     * Displays a dotted line separator for easier readibility in console output.
+     * Constructs a UI object with a new scanner instance.
      */
-    public static void showDottedLine() {
-        System.out.println("---------------------------");
+    public UI() {
+        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -26,84 +28,73 @@ public class UI {
      * @param name The person name to be displayed in front of text.
      * @param content The content of the message to be displayed.
      */
-    public void say(String name, String content) {
-        System.out.println(name + ": " + content);
+    public String say(String name, String content) {
+        return (name + ": " + content);
     }
 
     /**
      * Displays a message to the user.
      */
-    public void displayMessage(String message) {
-        System.out.println(message);
+    public String displayMessage(String message) {
+        return message;
     }
 
     /**
      * Greets the user with a welcome message when ChoiceBot first initiates.
      */
-    public void welcome() {
-        say(BOT_NAME, ": Hello, Welcome to ChoiceBot!");
-        say(BOT_NAME, ": What would you like to do?");
-        showDottedLine();
+    public static String welcome() {
+        return (BOT_NAME + ": Hello, Welcome to ChoiceBot!\n")
+                + (BOT_NAME + ": What would you like to do?\n");
     }
 
     /**
      * Displays a message after deleting a task.
      */
-    public static void deleteTaskMessage(Task task) {
-        System.out.println("Noted. I have removed the following task:");
-        System.out.println("\t" + task);
-        showDottedLine();
+    public static String deleteTaskMessage(Task task, TaskList tasks) {
+        return "Noted. I have removed the following task:\n"
+                + ("\t" + task) + "\n" + displayCountMessage(tasks);
     }
 
     /**
      * Displays the current number of tasks in the task list.
-     * @param count The number of tasks in the task list.
+     * @param tasks TaskList used in the current instance
      */
-    public static void displayCountMessage(Integer count) {
+    public static String displayCountMessage(TaskList tasks) {
+        int count = tasks.getCount();
         if (count == 1) {
-            System.out.println("Now you have " + count + " task in the list.");
+            return ("Now you have " + count + " task in the list.");
 
         } else {
-            System.out.println("Now you have " + count + " tasks in the list.");
+            return ("Now you have " + count + " tasks in the list.");
         }
     }
 
     /**
-     * Displays an error message when a ChoiceBotException occurs.
-     *
-     * @param e The ChoiceBotException to display.
-     */
-    public void displayError(ChoiceBotException e) {
-        displayMessage(e.getMessage());
-        showDottedLine();
-    }
-
-    /**
      * Displays a message after adding a task.
+     *
+     * @param task Task that has been added.
+     * @param tasks TaskList that is used in current instance.
      */
-    public void addTaskMessage(Task task) {
-        displayMessage("Got it. I've added this task: ");
-        displayMessage("\t" + task);
-        task.displayCount();
-        showDottedLine();
+    public String addTaskMessage(Task task, TaskList tasks) {
+        return displayMessage("Got it. I've added this task: \n")
+            + displayMessage("\t" + task) + "\n"
+            + displayCountMessage(tasks);
     }
 
     /**
      * Displays a message after unmarking a task.
      */
-    public void unmarkTaskMessage(Task task) {
-        displayMessage("\tOk, I've unmarked the following task for you: ");
-        displayMessage("\t" + task);
-        showDottedLine();
+    public String unmarkTaskMessage(Task task) {
+        return displayMessage("\tOk, I've unmarked the following task for you: \n")
+                + displayMessage("\t" + task) + "\n";
     }
 
     /**
      * Displays a message after marking a task.
      */
-    public void markTaskMessage(Task task) {
-        displayMessage("\tNice! I've marked this task as done: ");
-        displayMessage("\t" + task);
-        showDottedLine();
+    public String markTaskMessage(Task task) {
+        return displayMessage("\tNice! I've marked this task as done: \n")
+                + displayMessage("\t" + task) + "\n";
     }
 
     /**
@@ -111,39 +102,38 @@ public class UI {
      *
      * @param taskList The list of tasks to be displayed.
      */
-    public void displayList(ArrayList<Task> taskList) {
-        displayMessage("\tHere are the tasks in your list:");
+    public String displayList(ArrayList<Task> taskList, boolean isMatchingList) {
+        StringBuilder sb = new StringBuilder();
+        if (isMatchingList) {
+            sb.append("\tHere are the matching tasks in your list:\n");
+        } else {
+            sb.append("\tHere are the tasks in your list:\n");
+        }
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
-            displayMessage("\t" + (i + 1) + "." + currentTask);
+            sb.append("\t").append(i + 1).append(".").append(currentTask).append("\n");
         }
-        showDottedLine();
+        return sb.toString();
     }
 
     /**
      * Displays the exit message when the conversation with ChoiceBot ends.
      */
-    public void exitMessage() {
-        say("ChoiceBot", ": Thanks for stopping by! See you again!");
+    public String exitMessage() {
+        return say("ChoiceBot", ": Thanks for stopping by! See you again!");
     }
 
     /**
      * Displays an error message if no tasks match the given keyword.
      */
-    public void displayNoMatchingTasks() {
-        displayMessage("Sorry. There are no tasks matching your keyword");
-        showDottedLine();
+    public String displayNoMatchingTasks() {
+        return displayMessage("Sorry. There are no tasks matching your keyword \n");
     }
 
     /**
-     * Displays a list of tasks matching the given keyword.
+     * Returns the user text input as a String.
      */
-    public void displayMatchingTasks(ArrayList<Task> taskList) {
-        displayMessage("\tHere are the matching tasks in your list:");
-        for (int i = 0; i < taskList.size(); i++) {
-            Task currentTask = taskList.get(i);
-            displayMessage("\t" + (i + 1) + "." + currentTask);
-        }
-        showDottedLine();
+    public String readUserInput() {
+        return scanner.nextLine();
     }
 }

@@ -28,10 +28,11 @@ public class DeleteCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If index of task is not found in task list, or if description is blank.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         try {
             if (description == null || description.isBlank()) {
                 throw new ChoiceBotException("Please provide a task number to delete.");
@@ -46,9 +47,9 @@ public class DeleteCommand extends Command {
                         tasks.size()));
             }
             Task task = tasks.getTask(taskNumber);
-            task.deleteMessage();
             tasks.deleteTask(task);
-            Storage.saveFile(tasks);
+            storage.saveFile(tasks);
+            return UI.deleteTaskMessage(task, tasks);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
         }

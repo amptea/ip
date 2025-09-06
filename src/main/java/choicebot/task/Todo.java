@@ -19,8 +19,6 @@ public class Todo extends Task {
         this.type = "T";
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("You must add a description for toDo tasks. Please try again.");
-        } else {
-            count++;
         }
     }
 

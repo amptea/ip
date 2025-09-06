@@ -33,13 +33,14 @@ public class DeadlineCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If command does not have /by, or deadline name or due date is blank.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         if (!description.contains("/by ")) {
             throw new ChoiceBotException(
-                    "Please follow format: deadline {description} /by {deadline}.");
+                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
         }
 
         String dueDateString = description.split("/by ")[1].trim();
@@ -47,15 +48,15 @@ public class DeadlineCommand extends Command {
 
         if (deadlineName.isBlank() || dueDateString.isBlank()) {
             throw new ChoiceBotException(
-                    "Please follow format: deadline {description} /by {deadline}.");
+                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
         }
 
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString);
-            Task deadline = new Deadline(deadlineName, false, dueDate);
-            tasks.addTask(deadline);
-            Storage.saveFile(tasks);
-            ui.addTaskMessage(deadline);
+            Task deadlineTask = new Deadline(deadlineName, false, dueDate);
+            tasks.addTask(deadlineTask);
+            storage.saveFile(tasks);
+            return ui.addTaskMessage(deadlineTask, tasks);
         } catch (DateTimeParseException e) {
             throw new ChoiceBotException("Please use format \"yyyy-mm-dd\" for deadline.");
         }

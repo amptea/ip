@@ -1,5 +1,6 @@
 package choicebot.command;
 
+import choicebot.storage.Storage;
 import choicebot.task.TaskList;
 import choicebot.ui.UI;
 
@@ -15,9 +16,10 @@ public class ExitCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) {
-        ui.exitMessage();
+    public String execute(TaskList tasks, UI ui, Storage storage) {
+        return ui.exitMessage();
     }
 }

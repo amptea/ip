@@ -29,8 +29,6 @@ public class Deadline extends Task {
         if (dueDate == null) {
             throw new ChoiceBotException(
                     "You must add a due date for choicebot.task.Deadline tasks. Please try again.");
-        } else {
-            count++;
         }
     }
 

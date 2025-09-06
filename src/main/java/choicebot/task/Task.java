@@ -3,7 +3,6 @@ package choicebot.task;
 import java.time.LocalDate;
 
 import choicebot.ChoiceBotException;
-import choicebot.ui.UI;
 
 /**
  * Represents the task superclass.
@@ -12,7 +11,6 @@ import choicebot.ui.UI;
  * </p>
  */
 public class Task {
-    protected static int count;
     protected String description;
     protected boolean isDone;
     protected String type;
@@ -26,8 +24,6 @@ public class Task {
         this.isDone = isDone;
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("You must add a description for toDo tasks. Please try again.");
-        } else {
-            count++;
         }
     }
 
@@ -58,26 +54,6 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
-    }
-
-    /**
-     * Displays the number of tasks currently in the task list.
-     */
-    public void displayCount() {
-        UI.displayCountMessage(count);
-    }
-
-    public static int getCount() {
-        return count;
-    }
-
-    /**
-     * Displays the number of tasks remaining in task list after deleting current task.
-     */
-    public void deleteMessage() {
-        UI.deleteTaskMessage(this);
-        count--;
-        displayCount();
     }
 
     public String getType() {

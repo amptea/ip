@@ -83,4 +83,11 @@ public class TaskList {
         }
         return matchingTasks;
     }
+
+    /**
+     * Returns the number of tasks in task list.
+     */
+    public int getCount() {
+        return tasks.size();
+    }
 }

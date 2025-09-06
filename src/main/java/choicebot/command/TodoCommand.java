@@ -30,17 +30,18 @@ public class TodoCommand extends Command {
      *
      * @param tasks Task list in current instance.
      * @param ui User interface in current instance.
+     * @param storage Storage used in current instance.
      * @throws ChoiceBotException If description is null or blank.
      */
     @Override
-    public void execute(TaskList tasks, UI ui) throws ChoiceBotException {
+    public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         if (description == null || description.isBlank()) {
             throw new ChoiceBotException("Please add a description for toDo event.");
         }
-        Task todo = new Todo(description, false);
-        tasks.addTask(todo);
-        Storage.saveFile(tasks);
-        ui.addTaskMessage(todo);
+        Task todoTask = new Todo(description, false);
+        tasks.addTask(todoTask);
+        storage.saveFile(tasks);
+        return ui.addTaskMessage(todoTask, tasks);
     }
 }
 

@@ -58,7 +58,7 @@ public class Storage {
      *
      * @throws ChoiceBotException If the file cannot be written to.
      */
-    public static void saveFile(TaskList tasks) throws ChoiceBotException {
+    public void saveFile(TaskList tasks) throws ChoiceBotException {
         try {
             File file = new File(filePath);
             File parentFile = file.getParentFile();
