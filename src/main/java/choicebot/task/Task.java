@@ -22,7 +22,7 @@ public class Task {
     public Task(String description, Boolean isDone) throws ChoiceBotException {
         this.description = description;
         this.isDone = isDone;
-        if (description == null || description.isBlank()) {
+        if (description.isBlank()) {
             throw new ChoiceBotException("You must add a description for toDo tasks. Please try again.");
         }
     }
@@ -65,6 +65,7 @@ public class Task {
      * The string is to be saved in the storage file.
      */
     public String saveTask() {
+        assert type != null : "Task type must be specified";
         return String.format("%s | %d | %s",
                 this.getType(),
                 this.isDone ? 1 : 0,
@@ -87,10 +88,12 @@ public class Task {
         case ("T"):
             return new Todo(description, isDone);
         case("D"):
+            assert taskParts.length == 4 : "Deadline must have 4 parts";
             String dueDateString = taskParts[3].trim();
             LocalDate dueDate = LocalDate.parse(dueDateString);
             return new Deadline(description, isDone, dueDate);
         case ("E"):
+            assert taskParts.length == 5 : "Event must have 5 parts";
             String startDate = taskParts[3].trim();
             String endDate = taskParts[4].trim();
             return new Event(description, isDone, startDate, endDate);

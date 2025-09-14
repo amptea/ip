@@ -40,6 +40,7 @@ public class TodoCommand extends Command {
         }
         Task todoTask = new Todo(description, false);
         tasks.addTask(todoTask);
+        assert tasks.getTaskList().contains(todoTask) : "Todo task was not added to task list";
         storage.saveFile(tasks);
         return ui.addTaskMessage(todoTask, tasks);
     }
