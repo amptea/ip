@@ -1,5 +1,9 @@
 package choicebot.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import choicebot.ChoiceBotException;
 import choicebot.storage.Storage;
 import choicebot.task.Event;
@@ -12,6 +16,8 @@ import choicebot.ui.UI;
  * An Event follows the format: event {description} /from {time} /to {time}
  */
 public class EventCommand extends Command {
+    private static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected String description;
 
     /**
@@ -40,15 +46,22 @@ public class EventCommand extends Command {
         String[] descriptionTimeSplit = description.split("/from", 2);
         String eventName = descriptionTimeSplit[0].trim();
         String[] timeSplit = descriptionTimeSplit[1].split("/to", 2);
-        String from = timeSplit[0].trim();
-        String to = timeSplit[1].trim();
+        String startString = timeSplit[0].trim();
+        String endString = timeSplit[1].trim();
 
-        handleEvent(eventName, from, to);
-        Task eventTask = new Event(eventName, false, from, to);
-        tasks.addTask(eventTask);
-        assert tasks.getTaskList().contains(eventTask) : "Event task was not added to task list";
-        storage.saveFile(tasks);
-        return ui.addTaskMessage(eventTask, tasks);
+        handleEventParameters(eventName, startString, endString);
+
+        try {
+            LocalDateTime startDate = LocalDateTime.parse(startString, DATE_FORMAT);
+            LocalDateTime endDate = LocalDateTime.parse(endString, DATE_FORMAT);
+            Task eventTask = new Event(eventName, false, startDate, endDate);
+            tasks.addTask(eventTask);
+            assert tasks.getTaskList().contains(eventTask) : "Event task was not added to task list";
+            storage.saveFile(tasks);
+            return ui.addTaskMessage(eventTask, tasks);
+        } catch (DateTimeParseException e) {
+            throw new ChoiceBotException("Please use format \"yyyy-MM-dd HH:mm\" for start and end dates.");
+        }
     }
 
     /**
@@ -57,17 +70,19 @@ public class EventCommand extends Command {
     public void handleDescription() throws ChoiceBotException {
         if (!description.contains("/from ") || !description.contains("/to")) {
             throw new ChoiceBotException(
-                    "Please follow format: event {description} /from {start} /to {end}.");
+                    "Please follow format: "
+                            + "event {description} /from {yyyy-MM-dd HH:mm} /to {yyyy-MM-dd HH:mm}.");
         }
     }
 
     /**
      * Throws a ChoiceBotException if event parameters are blank.
      */
-    public void handleEvent(String eventName, String from, String to) throws ChoiceBotException {
-        if (eventName.isBlank() || from.isBlank() || to.isBlank()) {
+    public void handleEventParameters(String eventName, String start, String end) throws ChoiceBotException {
+        if (eventName.isBlank() || start.isBlank() || end.isBlank()) {
             throw new ChoiceBotException(
-                    "Please follow format: event {description} /from {start} /to {end}.");
+                    "Please follow format: "
+                            + "event {description} /from {yyyy-MM-dd HH:mm} /to {yyyy-MM-dd HH:mm}.");
         }
     }
 }
