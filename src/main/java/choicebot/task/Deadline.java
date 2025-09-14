@@ -68,4 +68,11 @@ public class Deadline extends Task {
     public String convertDate(LocalDate date) {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
+
+    /**
+     * Returns the due date for deadline task.
+     */
+    public LocalDate getDueDate() {
+        return this.dueDate;
+    }
 }

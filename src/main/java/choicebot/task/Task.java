@@ -1,6 +1,8 @@
 package choicebot.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import choicebot.ChoiceBotException;
 
@@ -11,6 +13,8 @@ import choicebot.ChoiceBotException;
  * </p>
  */
 public class Task {
+    private static final DateTimeFormatter DATE_FORMAT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     protected String description;
     protected boolean isDone;
     protected String type;
@@ -94,8 +98,11 @@ public class Task {
             return new Deadline(description, isDone, dueDate);
         case ("E"):
             assert taskParts.length == 5 : "Event must have 5 parts";
-            String startDate = taskParts[3].trim();
-            String endDate = taskParts[4].trim();
+            String startDateString = taskParts[3].trim();
+            String endDateString = taskParts[4].trim();
+            // Converts strings to proper LocalDateFormat
+            LocalDateTime startDate = LocalDateTime.parse(startDateString, DATE_FORMAT);
+            LocalDateTime endDate = LocalDateTime.parse(endDateString, DATE_FORMAT);
             return new Event(description, isDone, startDate, endDate);
         default:
             throw new ChoiceBotException("Task could not be loaded properly.");

@@ -9,8 +9,10 @@ import choicebot.command.ExitCommand;
 import choicebot.command.FindCommand;
 import choicebot.command.ListCommand;
 import choicebot.command.MarkCommand;
+import choicebot.command.SortCommand;
 import choicebot.command.TodoCommand;
 import choicebot.command.UnmarkCommand;
+
 
 /**
  * Parser class interprets user input and converts it to an executable Command.
@@ -52,6 +54,8 @@ public class Parser {
             return new DeadlineCommand(commandDescription);
         case ("find"):
             return new FindCommand(commandDescription);
+        case ("sort"):
+            return new SortCommand(commandDescription);
         default:
             throw new ChoiceBotException("Invalid input. Please try again.");
         }

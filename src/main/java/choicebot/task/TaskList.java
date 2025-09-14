@@ -1,6 +1,9 @@
 package choicebot.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
 
 /**
  * Represents a collection of Task objects.
@@ -91,5 +94,47 @@ public class TaskList {
      */
     public int getCount() {
         return tasks.size();
+    }
+
+    /**
+     * Sorts the {@link Event tasks} in task list according to the start time.
+     *
+     * @return Returns list of sorted {@link Event tasks}.
+     */
+    public ArrayList<Task> sortEventTasks() {
+        assert tasks != null : "Task list cannot be empty.";
+        return tasks.stream()
+                .filter(task -> task instanceof Event)
+                .map(task -> (Event) task)
+                .sorted(Comparator.comparing(Event::getStartDate))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Sorts the {@link Todo tasks} in task list according to alphabetical order.
+     *
+     * @return Returns list of sorted {@link Todo tasks}.
+     */
+    public ArrayList<Task> sortTodoTasks() {
+        assert tasks != null : "Task list cannot be empty.";
+        return tasks.stream()
+                .filter(task -> task instanceof Todo)
+                .map(task -> (Todo) task)
+                .sorted(Comparator.comparing(Todo::getDescription))
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    /**
+     * Sorts the {@link Deadline tasks} in task list according to the due date.
+     *
+     * @return Returns list of sorted {@link Deadline tasks}.
+     */
+    public ArrayList<Task> sortDeadlineTasks() {
+        assert tasks != null : "Task list cannot be empty.";
+        return tasks.stream()
+                .filter(task -> task instanceof Deadline)
+                .map(task -> (Deadline) task)
+                .sorted(Comparator.comparing(Deadline::getDueDate))
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
