@@ -64,6 +64,7 @@ public class UI {
         assert count >= 0 : "Task count should be positive";
         if (count == 1) {
             return ("Now you have " + count + " task in the list.");
+
         } else {
             return ("Now you have " + count + " tasks in the list.");
         }

@@ -39,26 +39,13 @@ public class Storage {
             return taskList;
         }
         try (Scanner scanner = new Scanner(file)) {
-            taskList = scanFile(scanner, taskList);
+            while (scanner.hasNextLine()) {
+                String text = scanner.nextLine();
+                Task task = Task.loadTask(text);
+                taskList.addTask(task);
+            }
         } catch (IOException e) {
             throw new ChoiceBotException("Could not read tasks from file: " + e.getMessage());
-        }
-        return taskList;
-    }
-
-    /**
-     * Reads the saved file and adds tasks to task list.
-     *
-     * @param scanner Scanner instance to read each line of text.
-     * @param taskList Task list storing tasks in current instance.
-     * @return Task list with all saved tasks added.
-     * @throws ChoiceBotException If saved task is in wrong format.
-     */
-    public TaskList scanFile(Scanner scanner, TaskList taskList) throws ChoiceBotException {
-        while (scanner.hasNextLine()) {
-            String text = scanner.nextLine();
-            Task task = Task.loadTask(text);
-            taskList.addTask(task);
         }
         return taskList;
     }
