@@ -63,7 +63,6 @@ public class UI {
         int count = tasks.getCount();
         if (count == 1) {
             return ("Now you have " + count + " task in the list.");
-
         } else {
             return ("Now you have " + count + " tasks in the list.");
         }

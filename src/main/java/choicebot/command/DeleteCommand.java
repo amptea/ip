@@ -34,24 +34,45 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
         try {
-            if (description == null || description.isBlank()) {
-                throw new ChoiceBotException("Please provide a task number to delete.");
-            }
-            if (tasks.isEmpty()) {
-                throw new ChoiceBotException("No tasks available to delete.");
-            }
+            handleDescription();
+            handleTaskList(tasks);
             int taskNumber = Integer.parseInt(description.trim()) - 1;
-            if (taskNumber < 0 || taskNumber >= tasks.size()) {
-                throw new ChoiceBotException(String.format(
-                        "Invalid task number. Please input a task number from 1 to %d",
-                        tasks.size()));
-            }
+            handleTaskNumber(taskNumber, tasks);
             Task task = tasks.getTask(taskNumber);
             tasks.deleteTask(task);
             storage.saveFile(tasks);
             return UI.deleteTaskMessage(task, tasks);
         } catch (NumberFormatException e) {
             throw new ChoiceBotException("Sorry! Task number must be an integer.");
+        }
+    }
+
+    /**
+     * Throws a ChoiceBotException if description is null or blank.
+     */
+    public void handleDescription() throws ChoiceBotException {
+        if (description == null || description.isBlank()) {
+            throw new ChoiceBotException("Please provide a task number to delete.");
+        }
+    }
+
+    /**
+     * Throws a ChoiceBotException if task list is empty.
+     */
+    public void handleTaskList(TaskList tasks) throws ChoiceBotException {
+        if (tasks.isEmpty()) {
+            throw new ChoiceBotException("No tasks available to delete.");
+        }
+    }
+
+    /**
+     * Throws a ChoiceBotException if task number is invalid.
+     */
+    public void handleTaskNumber(int taskNumber, TaskList tasks) throws ChoiceBotException {
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
+            throw new ChoiceBotException(String.format(
+                    "Invalid task number. Please input a task number from 1 to %d",
+                    tasks.size()));
         }
     }
 }
