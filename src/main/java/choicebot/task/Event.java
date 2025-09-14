@@ -26,7 +26,7 @@ public class Event extends Task {
         this.from = from;
         this.to = to;
         this.type = "E";
-        if (description == null || description.isBlank()) {
+        if (description.isBlank()) {
             throw new ChoiceBotException(
                     "You must add a description for choicebot.task.Event tasks. Please try again.");
         }
@@ -60,6 +60,9 @@ public class Event extends Task {
      */
     @Override
     public String saveTask() {
+        assert this.type != null : "Task type must be specified";
+        assert this.description != null : "Task description must be specified";
+        assert this.from != null || this.to != null : "From/To date must be specified";
         return String.format("%s | %d | %s | %s | %s",
                 this.getType(),
                 this.isDone ? 1 : 0,

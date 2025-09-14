@@ -28,6 +28,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         this.tasks.add(task);
+        assert this.tasks.contains(task) : "Task was not added properly.";
     }
 
     /**
@@ -35,6 +36,7 @@ public class TaskList {
      */
     public void deleteTask(Task task) {
         this.tasks.remove(task);
+        assert !this.tasks.contains(task) : "Task was not deleted properly.";
     }
 
     /**

@@ -55,6 +55,7 @@ public class DeadlineCommand extends Command {
             LocalDate dueDate = LocalDate.parse(dueDateString);
             Task deadlineTask = new Deadline(deadlineName, false, dueDate);
             tasks.addTask(deadlineTask);
+            assert tasks.getTaskList().contains(deadlineTask) : "Deadline task was not added to task list";
             storage.saveFile(tasks);
             return ui.addTaskMessage(deadlineTask, tasks);
         } catch (DateTimeParseException e) {
