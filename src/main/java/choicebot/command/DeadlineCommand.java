@@ -38,10 +38,18 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
-        handleDescription();
+        if (!description.contains("/by ")) {
+            throw new ChoiceBotException(
+                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
+        }
+
         String dueDateString = description.split("/by ")[1].trim();
         String deadlineName = description.split("/by ")[0].trim();
-        handleDeadlineName(dueDateString, deadlineName);
+
+        if (deadlineName.isBlank() || dueDateString.isBlank()) {
+            throw new ChoiceBotException(
+                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
+        }
 
         try {
             LocalDate dueDate = LocalDate.parse(dueDateString);
@@ -52,26 +60,6 @@ public class DeadlineCommand extends Command {
             return ui.addTaskMessage(deadlineTask, tasks);
         } catch (DateTimeParseException e) {
             throw new ChoiceBotException("Please use format \"yyyy-mm-dd\" for deadline.");
-        }
-    }
-
-    /**
-     * Throws a ChoiceBotException if description does not contain /by flag.
-     */
-    public void handleDescription() throws ChoiceBotException {
-        if (!description.contains("/by ")) {
-            throw new ChoiceBotException(
-                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
-        }
-    }
-
-    /**
-     * Throws a ChoiceBotException if deadline name or due date is blank.
-     */
-    public void handleDeadlineName(String deadlineName, String dueDateString) throws ChoiceBotException {
-        if (deadlineName.isBlank() || dueDateString.isBlank()) {
-            throw new ChoiceBotException(
-                    "Please follow format: deadline {description} /by {yyyy-mm-dd}.");
         }
     }
 }

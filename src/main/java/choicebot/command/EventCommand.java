@@ -35,7 +35,10 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws ChoiceBotException {
-        handleDescription();
+        if (!description.contains("/from ") || !description.contains("/to")) {
+            throw new ChoiceBotException(
+                    "Please follow format: event {description} /from {start} /to {end}.");
+        }
 
         String[] descriptionTimeSplit = description.split("/from", 2);
         String eventName = descriptionTimeSplit[0].trim();
@@ -43,31 +46,15 @@ public class EventCommand extends Command {
         String from = timeSplit[0].trim();
         String to = timeSplit[1].trim();
 
-        handleEvent(eventName, from, to);
+        if (eventName.isBlank() || from.isBlank() || to.isBlank()) {
+            throw new ChoiceBotException(
+                    "Please follow format: event {description} /from {start} /to {end}.");
+        }
+
         Task eventTask = new Event(eventName, false, from, to);
         tasks.addTask(eventTask);
         assert tasks.getTaskList().contains(eventTask) : "Event task was not added to task list";
         storage.saveFile(tasks);
         return ui.addTaskMessage(eventTask, tasks);
-    }
-
-    /**
-     * Throws a ChoiceBotException if no /from or /to flags.
-     */
-    public void handleDescription() throws ChoiceBotException {
-        if (!description.contains("/from ") || !description.contains("/to")) {
-            throw new ChoiceBotException(
-                    "Please follow format: event {description} /from {start} /to {end}.");
-        }
-    }
-
-    /**
-     * Throws a ChoiceBotException if event parameters are blank.
-     */
-    public void handleEvent(String eventName, String from, String to) throws ChoiceBotException {
-        if (eventName.isBlank() || from.isBlank() || to.isBlank()) {
-            throw new ChoiceBotException(
-                    "Please follow format: event {description} /from {start} /to {end}.");
-        }
     }
 }
