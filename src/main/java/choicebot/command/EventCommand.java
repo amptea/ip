@@ -46,6 +46,7 @@ public class EventCommand extends Command {
         handleEvent(eventName, from, to);
         Task eventTask = new Event(eventName, false, from, to);
         tasks.addTask(eventTask);
+        assert tasks.getTaskList().contains(eventTask) : "Event task was not added to task list";
         storage.saveFile(tasks);
         return ui.addTaskMessage(eventTask, tasks);
     }

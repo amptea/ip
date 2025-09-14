@@ -61,6 +61,7 @@ public class UI {
      */
     public static String displayCountMessage(TaskList tasks) {
         int count = tasks.getCount();
+        assert count >= 0 : "Task count should be positive";
         if (count == 1) {
             return ("Now you have " + count + " task in the list.");
         } else {

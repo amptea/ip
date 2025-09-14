@@ -40,6 +40,7 @@ public class DeleteCommand extends Command {
             handleTaskNumber(taskNumber, tasks);
             Task task = tasks.getTask(taskNumber);
             tasks.deleteTask(task);
+            assert !tasks.getTaskList().contains(task) : "Task was not deleted from task list";
             storage.saveFile(tasks);
             return UI.deleteTaskMessage(task, tasks);
         } catch (NumberFormatException e) {
