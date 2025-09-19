@@ -32,7 +32,7 @@ public class Event extends Task {
         this.startDate = startDate;
         this.endDate = endDate;
         this.type = "E";
-        if (description.isBlank()) {
+        if (description == null || description.isBlank()) {
             throw new ChoiceBotException(
                     "You must add a description for choicebot.task.Event tasks. Please try again.");
         }

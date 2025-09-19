@@ -26,7 +26,7 @@ public class Task {
     public Task(String description, Boolean isDone) throws ChoiceBotException {
         this.description = description;
         this.isDone = isDone;
-        if (description.isBlank()) {
+        if (description == null || description.isBlank()) {
             throw new ChoiceBotException("You must add a description for toDo tasks. Please try again.");
         }
     }

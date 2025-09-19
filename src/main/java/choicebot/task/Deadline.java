@@ -22,7 +22,7 @@ public class Deadline extends Task {
         super(description, isDone);
         this.dueDate = dueDate;
         this.type = "D";
-        if (description.isBlank()) {
+        if (description == null || description.isBlank()) {
             throw new ChoiceBotException(
                     "You must add a description for choicebot.task.Deadline tasks. Please try again.");
         }
