@@ -73,7 +73,7 @@ public class UI {
      * Displays a message after unmarking a task.
      */
     public String unmarkTaskMessage(Task task) {
-        return displayMessage("\tOk, I've unmarked the following task for you: \n")
+        return displayMessage("Ok, I've unmarked the following task for you: \n")
                 + displayMessage("\t" + task) + "\n";
     }
 
@@ -81,7 +81,7 @@ public class UI {
      * Displays a message after marking a task.
      */
     public String markTaskMessage(Task task) {
-        return displayMessage("\tNice! I've marked this task as done: \n")
+        return displayMessage("Nice! I've marked this task as done: \n")
                 + displayMessage("\t" + task) + "\n";
     }
 
@@ -93,9 +93,9 @@ public class UI {
     public String displayList(ArrayList<Task> taskList, boolean isMatchingList) {
         StringBuilder sb = new StringBuilder();
         if (isMatchingList) {
-            sb.append("\tHere are the matching tasks in your list:\n");
+            sb.append("Here are the matching tasks in your list:\n");
         } else {
-            sb.append("\tHere are the tasks in your list:\n");
+            sb.append("Here are the tasks in your list:\n");
         }
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);

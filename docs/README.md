@@ -1,6 +1,6 @@
 # ChoiceBot User Guide
 
-![Demonstration of App](/docs/Ui.png)
+![Demonstration of App](Ui.png)
 
 ## What's ChoiceBot?
 ChoiceBot saves you from having to remember all the things you need to do so you can focus on what's important to you. It's
