@@ -14,7 +14,7 @@ import choicebot.ChoiceBotException;
  */
 public class Task {
     private static final DateTimeFormatter DATE_FORMAT =
-            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
     protected String description;
     protected boolean isDone;
     protected String type;

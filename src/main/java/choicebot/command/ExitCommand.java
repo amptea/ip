@@ -20,6 +20,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) {
+        javafx.animation.PauseTransition delay = new javafx.animation.PauseTransition(javafx.util.Duration.seconds(1));
+        delay.setOnFinished(event -> javafx.application.Platform.exit());
+        delay.play();
         return ui.exitMessage();
     }
 }

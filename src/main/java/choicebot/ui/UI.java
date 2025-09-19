@@ -11,8 +11,6 @@ import choicebot.task.TaskList;
  * Provides methods for displaying messages, errors, tasks lists and feedback to the user.
  */
 public class UI {
-    /** Name used by ChoiceBot in its messages. */
-    private static final String BOT_NAME = "ChoiceBot";
     private final Scanner scanner;
 
     /**
@@ -20,16 +18,6 @@ public class UI {
      */
     public UI() {
         this.scanner = new Scanner(System.in);
-    }
-
-    /**
-     * Displays a message with the given username.
-     *
-     * @param name The person name to be displayed in front of text.
-     * @param content The content of the message to be displayed.
-     */
-    public String say(String name, String content) {
-        return (name + ": " + content);
     }
 
     /**
@@ -43,8 +31,8 @@ public class UI {
      * Greets the user with a welcome message when ChoiceBot first initiates.
      */
     public static String welcome() {
-        return (BOT_NAME + ": Hello, Welcome to ChoiceBot!\n")
-                + (BOT_NAME + ": What would you like to do?\n");
+        return "Hello, Welcome to ChoiceBot!\n"
+                + "What would you like to do?\n";
     }
 
     /**
@@ -120,7 +108,7 @@ public class UI {
      * Displays the exit message when the conversation with ChoiceBot ends.
      */
     public String exitMessage() {
-        return say("ChoiceBot", ": Thanks for stopping by! See you again!");
+        return "Thanks for stopping by! See you again!";
     }
 
     /**
