@@ -10,7 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for ChoiceBot using FXML.
  */
 public class Main extends Application {
 
@@ -23,7 +23,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setChoiceBot(choicebot); // inject the ChoiceBot instance
+            stage.setTitle("ChoiceBot");
+            fxmlLoader.<MainWindow>getController().setChoiceBot(choicebot);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

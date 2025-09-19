@@ -39,22 +39,25 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Creates dialog box for user, right aligned, green bubble, no avatar.
      */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setAlignment(Pos.TOP_RIGHT);
+        db.displayPicture.setVisible(false);
+        db.dialog.setStyle("-fx-background-color: #DCF8C6; -fx-background-radius: 15;"
+                + "-fx-padding: 8 12 8 12; -fx-font-size: 14px; -fx-text-fill: #303030;");
+        return db;
     }
 
+    /**
+     * Creates dialog box for bot, left aligned, white bubble with avatar.
+     */
     public static DialogBox getChoiceBotDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.flip();
+        db.setAlignment(Pos.TOP_LEFT);
+        db.dialog.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 15;"
+                + "-fx-padding: 8 12 8 12; -fx-font-size: 14px; -fx-text-fill: #303030;");
         return db;
     }
 }
